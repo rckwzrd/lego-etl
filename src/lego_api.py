@@ -14,6 +14,8 @@ load_dotenv()
 KEY = os.getenv("REBRICKABLE_KEY", default="NO_KEY")
 print(KEY)
 
+# update set list
+
 # load set numbers to list from pandas
 
 # build request url
