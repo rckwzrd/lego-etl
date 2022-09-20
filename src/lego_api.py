@@ -25,6 +25,14 @@ req = requests.get(url, headers=headers)
 print(req.url)
 print(req)
 
+url = 'https://rebrickable.com/api/v3/lego/sets/31062-1/'
+headers = {
+        "Accept": "application/json",
+        "Authorization": "key " + KEY
+}
+req = requests.get(url, headers=headers)
+print(req.url)
+print(req)
 # start request
 
 # return request
