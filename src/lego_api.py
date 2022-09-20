@@ -1,5 +1,11 @@
 """
 Connect to rebrickable rest api and return data by set number.
+
+API does not have parameters to embedded a set list payload into the call. 
+
+Have to retrieve details for each set individually and use a short sleep to follow rules.
+
+There may be a way to filter on a list of sets.
 """
 
 import os
