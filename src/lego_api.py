@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 
 # load api key
 load_dotenv()
-KEY = os.getenv("REBRICKABLE_KEY")
+KEY = os.getenv("KEY")
 
 # load set ids
 set_ids = pandas.read_csv("./input_data/sets.csv")["set_num"].tolist()
@@ -39,10 +39,14 @@ set_data = [run_request(set_id) for set_id in set_ids[0:5]]
 print(set_data)
 
 # load to df
+set_df = pandas.DataFrame(set_data)
 
 # print head
+print(set_df.head())
 
 # count sets and sum parts
+print(set_df["num_parts"].sum())
+print(set_df["num_parts"].count())
 
 # request set
 #req = requests.get(url="https://rebrickable.com/api/v3/lego/sets/60181-1", headers=headers)
