@@ -28,14 +28,20 @@ headers = {
 }
 
 # helper to get run request
-def run_request(set_id):
+def get_sets(set_id):
     url = f"https://rebrickable.com/api/v3/lego/sets/{set_id}"
     req = requests.get(url=url, headers=headers)
     time.sleep(1.1)
     return req.json()
 
+def get_themes():
+    url = "https://rebrickable.com/api/v3/lego/themes/?page=1&page_size=500"
+    req = requests.get(url=url, headers=headers)
+    time.sleep(1.1)
+    return req.json()["results"]
+
 # request data for each set
-set_data = [run_request(set_id) for set_id in set_ids[0:5]]
+set_data = [get_sets(set_id) for set_id in set_ids[0:3]]
 print(set_data)
 
 # load to df
@@ -48,14 +54,12 @@ print(set_df.head())
 print(set_df["num_parts"].sum())
 print(set_df["num_parts"].count())
 
-# request set
-#req = requests.get(url="https://rebrickable.com/api/v3/lego/sets/60181-1", headers=headers)
 #print(req.url)
 #print(type(req.json()))
 #print(req.ok)
 #print(req.status_code)
 
 # request themes
-#url = 'https://rebrickable.com/api/v3/lego/themes/'
-#headers = {'Authorization': "key " + KEY}
-#req = requests.get(url, headers=headers)
+themes_data = get_themes()
+print(themes_data)
+
