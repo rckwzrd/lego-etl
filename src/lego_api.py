@@ -41,7 +41,7 @@ def get_themes():
     return req.json()["results"]
 
 # request data for each set
-set_data = [get_sets(set_id) for set_id in set_ids[0:3]]
+set_data = [get_sets(set_id) for set_id in set_ids]
 print(set_data)
 
 # load to df
@@ -54,12 +54,14 @@ print(set_df.head())
 print(set_df["num_parts"].sum())
 print(set_df["num_parts"].count())
 
-#print(req.url)
-#print(type(req.json()))
-#print(req.ok)
-#print(req.status_code)
-
 # request themes
-themes_data = get_themes()
+themes_data = pandas.DataFrame(get_themes())
+themes_data
 print(themes_data)
+
+# join sets to themes and save
+join_data = set_df.merge(themes_data, left_on="theme_id", right_on="id", validate="m:1")
+join_data.to_csv("output_data/join_data.csv")
+print(join_data.head())
+print(join_data["name_y"].value_counts())
 
