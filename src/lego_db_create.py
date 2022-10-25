@@ -4,23 +4,12 @@ import sqlite3
 from lego_api import get_sets, get_themes
 
 #print(get_sets("31062-1"))
-# make database
-
-# connect and create database
-
-# create cursor to execute statements
-
-# make set table, set types and key
-
-# make theme table, set types and key
 
 # load single set
 
 # load single theme
 
 # back up
-
-# close connection
 
 # proper string formatting
 
@@ -31,6 +20,14 @@ def connect_db(db_file):
     except sqlite3.Error as e:
         raise e
     return conn
+
+
+def close_db(conn):
+    try:
+        conn.close()
+        print("Connection Closed")
+    except sqlite3.Error as e:
+        raise e
 
 
 def create_table(conn, table_sql):
@@ -44,7 +41,6 @@ def create_table(conn, table_sql):
 
 def main():
     db_file = "lego.db"
-    conn = connect_db(db_file)
 
     create_themes_sql = """
         CREATE TABLE IF NOT EXISTS themes (
@@ -52,7 +48,6 @@ def main():
             theme_name TEXT NOT NULL
         );
         """
-
     create_sets_sql = """
         CREATE TABLE IF NOT EXISTS sets (
             set_num TEXT PRIMARY KEY,
@@ -63,8 +58,11 @@ def main():
             FOREIGN KEY (theme_id) REFERENCES themes (theme_id)
         );
         """
+
+    conn = connect_db(db_file)
     create_table(conn, create_themes_sql)
     create_table(conn, create_sets_sql)
+    close_db(conn)
 
 
 if __name__ == "__main__":
