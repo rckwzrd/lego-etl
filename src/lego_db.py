@@ -1,17 +1,4 @@
-# need to install sqlite3
-
 import sqlite3
-from lego_api import get_sets, get_themes
-
-#print(get_sets("31062-1"))
-
-# load single set
-
-# load single theme
-
-# back up
-
-# proper string formatting
 
 def connect_db(db_file):
     try:
