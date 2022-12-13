@@ -1,4 +1,5 @@
 import sqlite3
+from lego_api import get_themes
 
 def connect_db(db_file):
     try:
@@ -26,7 +27,20 @@ def create_table(conn, table_sql):
         raise e
 
 
-def main():
+def load_table(conn, load_sql):
+    try:
+        c = conn.cursor()
+        # execute
+        print("Table Hydrated")
+    except sqlite3.Error as e:
+        raise e
+
+
+def load_theme_table():
+    pass
+
+
+def init_lego_db():
     db_file = "lego.db"
 
     create_themes_sql = """
