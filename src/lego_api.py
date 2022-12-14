@@ -47,26 +47,25 @@ def get_themes():
 
 if __name__ == "__main__":
 
-    # request data for each set
-    # set_data = [get_sets(set_id) for set_id in set_ids]
+    request data for each set
+    set_data = [get_sets(set_id) for set_id in set_ids]
     
-    # load to df
-    # set_df = pandas.DataFrame(set_data)
+    load to df
+    set_df = pandas.DataFrame(set_data)
     
-    # request themes
-    # themes_data = pandas.DataFrame(get_themes())
-    themes_data = get_themes()
+    request themes
+    themes_data = pandas.DataFrame(get_themes())
     
-    # join sets to themes and save
-    # join_data = set_df.merge(themes_data, left_on="theme_id", right_on="id", validate="m:1")
-    # join_data.to_csv("output_data/join_data.csv")
+    join sets to themes and save
+    join_data = set_df.merge(themes_data, left_on="theme_id", right_on="id", validate="m:1")
+    join_data.to_csv("output_data/join_data.csv")
     
-    # look at head of df
-    # print(join_data.head())
+    look at head of df
+    print(join_data.head())
     
-    # count sets, parts, and themes
-    # print(set_df["num_parts"].sum())
-    # print(set_df["num_parts"].count())
-    # print(join_data["name_y"].value_counts())
+    count sets, parts, and themes
+    print(set_df["num_parts"].sum())
+    print(set_df["num_parts"].count())
+    print(join_data["name_y"].value_counts())
     print(themes_data)
 

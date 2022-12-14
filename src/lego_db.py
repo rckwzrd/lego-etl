@@ -27,17 +27,36 @@ def create_table(conn, table_sql):
         raise e
 
 
-def load_table(conn, load_sql):
+def load_table(conn, load_sql, data):
     try:
-        c = conn.cursor()
-        # execute
-        print("Table Hydrated")
+        #NOTE: context manager
+        with conn:
+            conn.executemany(load_sql, data)
+            print("Table Hydrated")
     except sqlite3.Error as e:
         raise e
 
 
 def load_theme_table():
-    pass
+    db_file = "lego.db"
+
+    #NOTE: comprehension to unpack theme data
+    themes = [(i["id"], i["name"]) for i in get_themes()]
+
+    print(type(themes))
+    print(type(themes[0]))
+    print(themes[0])
+    print(themes[1])
+
+    #NOTE: sql insert statement, placeholders
+    load_sql = """
+        INSERT INTO themes VALUES(?, ?)
+    """
+
+    #NOTE: procedure
+    conn = connect_db(db_file)
+    load_table(conn, load_sql, themes)
+    close_db(conn)
 
 
 def init_lego_db():
@@ -67,7 +86,8 @@ def init_lego_db():
 
 
 if __name__ == "__main__":
-    main()
+    #init_lego_db()
+    load_theme_table()
 
 
 
